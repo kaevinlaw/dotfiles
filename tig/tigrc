@@ -1,0 +1,6 @@
+# vim-like keybindings for tig
+source ~/.config/tig/vim.tigrc
+
+# color schemes
+# source ~/.config/tig/color/neonwolf.tigrc
+source ~/.config/tig/color/desert.tigrc

@@ -1,0 +1,48 @@
+[include]
+    path = user.gitconfig
+
+[alias]
+    co = checkout
+    br = branch
+    ci = commit
+    st = status
+    cp = cherry-pick
+    pr= "!git diff -p | grep -E \"^(diff|old mode|new mode)\" | sed -e \"s/^old/NEW/;s/^new/old/;s/^NEW/new/\" | git apply" #use it before git add
+    permission-reset = "!git diff -p | grep -E \"^(diff|old mode|new mode)\" | sed -e \"s/^old/NEW/;s/^new/old/;s/^NEW/new/\" | git apply" #use it before git add
+    gl = log --decorate --oneline --graph
+    gld = log --decorate --oneline --graph --pretty=format:'%Cred%h%Creset %Cgreen%cd %C(auto)%d%Creset %s %C(bold blue)<%an>%Creset' --date=short
+    glda = log --all --decorate --oneline --graph --pretty=format:'%Cred%h%Creset %Cgreen%cd %C(auto)%d%Creset %s %C(bold blue)<%an>%Creset' --date=short
+    gld2 = log --decorate --oneline --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) %C(auto)%d%Creset %s %C(bold blue)<%an>%Creset'
+    gld3 = log --decorate --oneline --graph --pretty=format:'%Cred%h%Creset%C(auto)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --date=short
+    gld4 = log --decorate --oneline --graph --pretty=format:'%Cred%h%Creset %C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+
+    glnoref=log --decorate --oneline --graph --pretty=format:'%Cred%h%Creset %Cgreen%cd %Creset %s %C(bold blue)<%an>%Creset' --date=short
+
+    gljira = log --decorate --oneline --first-parent --pretty=format:'|%Cred%h%Creset|%Cgreen%cd %Creset|%s|%C(bold blue)<%an>%Creset|%C(auto)%d |' --date=short
+    gljira2 = log --decorate --oneline --first-parent --pretty=format:'|%C(auto)%d |%s|%C(bold blue)<%an>%Creset|%Cred%h%Creset|%Cgreen%cd %Creset|' --date=short
+
+    diffno = diff --name-only
+    dis = diff --ignore-all-space
+    disno = diff --ignore-all-space --name-only
+
+[core]
+    editor = nvim
+
+[color]
+    ui = auto
+
+[log]
+    date = iso8601-strict
+[merge]
+    tool = meld
+
+[mergetool "meld"]
+    cmd = meld --auto-merge \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output \"$MERGED\" --label \"MERGE (REMOTE BASE MY)\"
+    trustExitCode = false
+
+[mergetool]
+# don't ask if we want to skip merge
+    prompt = false
+
+# don't create backup *.orig files
+    keepBackup = false
