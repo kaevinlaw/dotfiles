@@ -70,6 +70,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'liuchengxu/vista.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'aklt/plantuml-syntax'
+Plug 'rhysd/git-messenger.vim'
 call plug#end()
 
 "colorscheme ron
