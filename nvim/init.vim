@@ -71,6 +71,7 @@ Plug 'liuchengxu/vista.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'aklt/plantuml-syntax'
 Plug 'rhysd/git-messenger.vim'
+Plug 'will133/vim-dirdiff'
 call plug#end()
 
 "colorscheme ron
