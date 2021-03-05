@@ -33,8 +33,13 @@
 
 [log]
     date = iso8601-strict
+
 [merge]
-    tool = meld
+    tool = vimdiff
+    conflictstyle = diff3
+
+[mergetool "vimdiff"]
+    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 
 [mergetool "meld"]
     cmd = meld --auto-merge \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output \"$MERGED\" --label \"MERGE (REMOTE BASE MY)\"
@@ -46,3 +51,6 @@
 
 # don't create backup *.orig files
     keepBackup = false
+
+[pull]
+    ff = only
