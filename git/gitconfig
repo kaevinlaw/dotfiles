@@ -4,6 +4,8 @@
 [alias]
     co = checkout
     br = branch
+    ca = commit --amend
+    cane = commit --amend --no-edit
     ci = commit
     st = status
     cp = cherry-pick
