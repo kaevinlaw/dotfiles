@@ -7,15 +7,15 @@ set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
 set undofile
-set hlsearch
-set shiftwidth=4
-set tabstop=2 softtabstop=2
+set nohlsearch
+set shiftwidth=2 tabstop=2 softtabstop=2
 set expandtab
 set list
 set listchars=trail:.
 set number
 set relativenumber
 set exrc
+set scrollback=100000
 
 " recursive path when open project at project root
 set path+=**
@@ -71,7 +71,9 @@ Plug 'liuchengxu/vista.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'aklt/plantuml-syntax'
 Plug 'rhysd/git-messenger.vim'
+Plug 'norcalli/nvim-colorizer.lua'
 Plug 'will133/vim-dirdiff'
+Plug 'Yggdroot/indentLine'
 call plug#end()
 
 "colorscheme ron
@@ -85,3 +87,10 @@ set bg=dark
 highlight normal guibg=NONE
 highlight normal ctermbg=NONE
 highlight nonText ctermbg=NONE
+highlight clear LineNr
+highlight clear SignColumn
+
+"set bg=dark
+lua require 'colorizer'.setup()
+
+let g:indentLine_char = '|'
