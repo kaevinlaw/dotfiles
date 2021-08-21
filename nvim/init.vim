@@ -43,9 +43,24 @@ nnoremap <C-l> <C-w>l
 " Y yanks till the end of line
 map Y y$
 
+" Keep cursor line centered after n/N/J jump
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+" undo breakpoints
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
 " move highlighted lines in visual mode
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
+
+" adds to jump list if jump > 4 rows
+nnoremap <expr> k (v:count > 4 ? "m'" . v:count : "") . 'k'
+nnoremap <expr> j (v:count > 4 ? "m'" . v:count : "") . 'j'
 
 " horizontal spilt below
 set splitbelow
