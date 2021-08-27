@@ -44,6 +44,10 @@ bindsym $mod+Return exec kitty
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# defaults
+## defaults window settings
+default_border pixel2
+
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -fn 'DejaVuSansMono-9' -nb '#2F3D44' -sf '#556064' -sb '#1ABC9C'
 # class                    border  backgr. text    indic.   child_border
