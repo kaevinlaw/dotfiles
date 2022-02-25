@@ -9,9 +9,14 @@
     ci = commit
     st = status
     cp = cherry-pick
+    rb = rebase
+    rbc = rebase --continue
+    rbi = rebase -i
+    rbo = rebase --onto
     pr= "!git diff -p | grep -E \"^(diff|old mode|new mode)\" | sed -e \"s/^old/NEW/;s/^new/old/;s/^NEW/new/\" | git apply" #use it before git add
     permission-reset = "!git diff -p | grep -E \"^(diff|old mode|new mode)\" | sed -e \"s/^old/NEW/;s/^new/old/;s/^NEW/new/\" | git apply" #use it before git add
     gl = log --decorate --oneline --graph
+    gln = log --decorate --oneline --graph -n
     gld = log --decorate --oneline --graph --pretty=format:'%Cred%h%Creset %Cgreen%cd %C(auto)%d%Creset %s %C(bold blue)<%an>%Creset' --date=short
     glda = log --all --decorate --oneline --graph --pretty=format:'%Cred%h%Creset %Cgreen%cd %C(auto)%d%Creset %s %C(bold blue)<%an>%Creset' --date=short
     gld2 = log --decorate --oneline --graph --pretty=format:'%Cred%h%Creset %Cgreen(%cr) %C(auto)%d%Creset %s %C(bold blue)<%an>%Creset'
