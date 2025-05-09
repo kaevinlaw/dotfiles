@@ -89,6 +89,7 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'will133/vim-dirdiff'
 Plug 'Yggdroot/indentLine'
+Plug 'mbbill/undotree'
 call plug#end()
 
 "colorscheme ron
