@@ -9,6 +9,7 @@
     ci = commit
     st = status
     cp = cherry-pick
+    cpx = cherry-pick -x
     rb = rebase
     rbc = rebase --continue
     rbi = rebase -i
@@ -31,6 +32,7 @@
     diffno = diff --name-only
     dis = diff --ignore-all-space
     disno = diff --ignore-all-space --name-only
+  pf = push --force
 
 [core]
     editor = nvim
