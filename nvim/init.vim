@@ -77,7 +77,15 @@ Plug 'morhetz/gruvbox'
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'neovim/nvim-lspconfig'
+Plug 'RishabhRD/popfix'
+Plug 'RishabhRD/nvim-lsputils'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'severin-lemaignan/vim-minimap'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -91,11 +99,13 @@ Plug 'will133/vim-dirdiff'
 Plug 'Yggdroot/indentLine'
 call plug#end()
 
+set termguicolors
+
 "colorscheme ron
 "colorscheme dracula
 "colorscheme desert
-colorscheme PaperColor
-"colorscheme deep-space
+"colorscheme PaperColor
+colorscheme deep-space
 "colorscheme gruvbox
 "colorscheme koehler
 set bg=dark
@@ -121,3 +131,59 @@ augroup Binary
   au BufWritePost *.bin if &bin | %!xxd
   au BufWritePost *.bin set nomod | endif
 augroup END
+
+lua << EOF
+require'lspconfig'.clangd.setup{}
+EOF
+
+"lua <<EOF
+"vim.lsp.handlers['textDocument/codeAction'] = require'lsputil.codeAction'.code_action_handler
+"vim.lsp.handlers['textDocument/references'] = require'lsputil.locations'.references_handler
+"vim.lsp.handlers['textDocument/definition'] = require'lsputil.locations'.definition_handler
+"vim.lsp.handlers['textDocument/declaration'] = require'lsputil.locations'.declaration_handler
+"vim.lsp.handlers['textDocument/typeDefinition'] = require'lsputil.locations'.typeDefinition_handler
+"vim.lsp.handlers['textDocument/implementation'] = require'lsputil.locations'.implementation_handler
+"vim.lsp.handlers['textDocument/documentSymbol'] = require'lsputil.symbols'.document_handler
+"vim.lsp.handlers['workspace/symbol'] = require'lsputil.symbols'.workspace_handler
+"EOF
+
+
+lua <<EOF
+  local cmp = require'cmp'
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+    mapping = {
+      ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+    },
+    formatting = {
+      format = function(entry, vim_item)
+        -- fancy icons and a name of kind
+        vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+        -- set a name for each source
+        vim_item.menu = ({
+          buffer = "[Buffer]",
+          nvim_lsp = "[LSP]",
+          luasnip = "[LuaSnip]",
+          nvim_lua = "[Lua]",
+          latex_symbols = "[Latex]",
+        })[entry.source.name]
+        return vim_item
+      end,
+    },
+    sources = {
+      { name = 'nvim_lsp' },
+    }
+  })
+EOF
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+lua <<EOF
+EOF
