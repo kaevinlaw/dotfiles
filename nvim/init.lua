@@ -141,7 +141,13 @@ require("lazy").setup({
     -- call the install script directly (only fetches the binary into ./bin)
     build = "./install --bin",
   },
-  "junegunn/fzf.vim",
+  {
+    "ibhagwan/fzf-lua",
+    dependencies = { "junegunn/fzf" },
+    config = function()
+      require("config.fzf_lua")
+    end,
+  },
 
   -- UI
   "vim-airline/vim-airline",
