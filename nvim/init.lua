@@ -183,6 +183,17 @@ require("lazy").setup({
   -- { "neoclide/coc.nvim", branch = "release" },
   -- "Yggdroot/indentLine",
   -- "github/copilot.vim",
+}, {
+  performance = {
+    rtp = {
+      -- lazy resets rtp and guesses nvim's lib dir as <prefix>/lib64/nvim, which
+      -- drops debian/ubuntu's multiarch /usr/lib/<arch>/nvim (bundled treesitter
+      -- parsers live there, e.g. vimdoc needed by :helptags). keep it.
+      paths = vim.tbl_filter(function(p)
+        return p:match("/lib/.*nvim$") ~= nil
+      end, vim.opt.rtp:get()),
+    },
+  },
 })
 
 -------------------------------------------------
