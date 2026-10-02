@@ -137,9 +137,9 @@ require("lazy").setup({
   -- Fuzzy finder (keep for now; replace in step 4)
   {
     "junegunn/fzf",
-    build = function()
-      vim.fn["fzf#install"]()
-    end,
+    -- runs before the plugin is loaded, so fzf#install() isn't defined yet;
+    -- call the install script directly (only fetches the binary into ./bin)
+    build = "./install --bin",
   },
   "junegunn/fzf.vim",
 
