@@ -14,7 +14,7 @@ fzf.setup({
     fd_opts = "--color=never --type f --hidden --follow --exclude .git --exclude .cache --exclude .ccache --exclude .clangd --exclude .conan",
   },
   grep = {
-    rg_opts = "--vimgrep --smart-case --follow --hidden -g '!{.git,.cache,.ccache,.clangd,.conan}/*'",
+    rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --follow --hidden -g '!{.git,.cache,.ccache,.clangd,.conan}/*' -e",
   },
 })
 
