@@ -4,7 +4,6 @@
 vim.opt.background = "dark"
 vim.opt.termguicolors = true
 
-vim.cmd("syntax on")
 
 vim.opt.errorbells = false
 vim.opt.smartindent = true
@@ -27,6 +26,8 @@ vim.opt.scrollback = 100000
 vim.opt.path:append("**")
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+vim.opt.signcolumn = "yes"         -- keep room for diagnostics/git signs
+vim.opt.updatetime = 300           -- faster CursorHold (diagnostics, highlights)
 
 -------------------------------------------------
 -- Leader
@@ -185,6 +186,42 @@ require("lazy").setup({
         })
       end,
     },
+
+  -- LSP: servers via mason (except clangd from apt), see lua/config/lsp.lua
+  "neovim/nvim-lspconfig", -- provides lsp/<server>.lua configs for vim.lsp.enable(); no setup() needed
+  { "mason-org/mason.nvim", opts = {} },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = { "mason-org/mason.nvim", "neovim/nvim-lspconfig" },
+    opts = {}, -- automatic_enable: vim.lsp.enable() each mason-installed server
+  },
+  {
+    -- installs config.lsp.mason_servers; :MasonToolsInstallSync for headless/ansible
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = { "mason-org/mason-lspconfig.nvim" },
+    opts = function()
+      return { ensure_installed = require("config.lsp").mason_servers }
+    end,
+  },
+  { "folke/lazydev.nvim", ft = "lua", opts = {} }, -- vim.* API for lua_ls in this config
+
+  -- Completion
+  {
+    "saghen/blink.cmp",
+    version = "1.*", -- release tags download the prebuilt fuzzy matcher (no rust needed)
+    opts = {
+      keymap = { preset = "enter" }, -- <CR> accepts, <C-space> opens (like coc)
+      completion = { documentation = { auto_show = true, auto_show_delay_ms = 300 } },
+      signature = { enabled = true },
+      sources = {
+        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        providers = {
+          lazydev = { name = "LazyDev", module = "lazydev.integrations.blink", score_offset = 100 },
+        },
+      },
+    },
+  },
+
   -- Optional / commented in your old config
   -- { "neoclide/coc.nvim", branch = "release" },
   -- "Yggdroot/indentLine",
@@ -201,6 +238,8 @@ require("lazy").setup({
     },
   },
 })
+
+require("config.lsp").setup()
 
 -------------------------------------------------
 -- Colorscheme + highlights
