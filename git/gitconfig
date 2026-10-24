@@ -32,6 +32,7 @@
     diffno = diff --name-only
     dis = diff --ignore-all-space
     disno = diff --ignore-all-space --name-only
+    icdiff = difftool --no-prompt --extcmd=icdiff
   pf = push --force
 
 [core]
