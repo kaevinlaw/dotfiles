@@ -39,7 +39,12 @@ function M.setup()
 
   -- clangd from apt (mason has no linux-arm64 build)
   vim.lsp.config("clangd", {
-    cmd = { "clangd", "--background-index", "--clang-tidy", "--header-insertion=never" },
+    cmd = {
+      "clangd", "--background-index", "--clang-tidy", "--header-insertion=never",
+      -- allow clangd to run cross-compilers installed under /opt to get their
+      -- built-in include paths and target; other compilers are not affected
+      "--query-driver=/opt/**/bin/*-gcc,/opt/**/bin/*-g++",
+    },
   })
   vim.lsp.enable("clangd")
 
